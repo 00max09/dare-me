@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index_style.css') }}">
+
+        <script>
+            let sources = [
+                {% for filename in data.filenames %}
+                        "{{url_for('get_video', name=filename)}}",
+                {% endfor %}
+            ];
+             let counter = 0;
+             function get_movie() {
+                counter += 1;
+                counter %= sources.length;
+                document.getElementById("player-source").setAttribute('src', sources[counter]);
+                document.getElementById("player").load();
+            }
+            function get_movie_dec() {
+                counter -= 1;
+                counter += sources.length;
+                counter %= sources.length;
+                document.getElementById("player-source").setAttribute('src', sources[counter]);
+                document.getElementById("player").load();
+            }
+             
+        </script>
+    </head>
+    <body onload="get_movie()">
+        <div class="container">
+            <div class="left-slider">
+                <div class="button">
+                    <button class="dot" onclick="get_movie_dec()">
+                        <!-- <div class="arrow left">
+                            
+                        </div> -->
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <video id="player" height="95%" width="100%" controls autoplay muted loop>
+                    <source id="player-source" type="video/mp4" >
+                </video>
+            </div>
+            <div class="right-slider">
+                <div class="button">
+                    <button class="dot" onclick="get_movie()">
+                        <!-- <div class="arrow right">
+                        </div> -->
+                        <!-- <button class="arrow-button"><span class="arrow"></span>
+                        </button> -->
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

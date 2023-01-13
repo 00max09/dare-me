@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_style.css') }}">
+        <script src="{{ url_for('static', filename='dashboard_funs.js') }}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                {% for category in data.categories %}
+                {{category}}
+                    <div class="category">
+                        <div class="category-watch">
+                            <button class="arrow-button" onclick="window.location='/watch?cat={{category}}';">WATCH CATEGORY</button>
+                            
+                        </div>
+                        <div class="category-challenge-desc">
+                            <button class="arrow-button" onclick="window.location='/challengedesc?cat={{category}}';">CHALLENGE DESCRIPTION</button>
+                        
+                        </div>
+                        <div class="category-upload">
+                            <button class="arrow-button" onclick="window.location='/upload?cat={{category}}';">UPLOAD CHALLENGE</button>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+                {{data.username}}
+            </div>
+            <div class="content">
+                <button class="arrow-button" onclick="window.location='/watch';">RANDOM WATCH</button>
+            </div>
+        </div>
+    </body>
+</html>

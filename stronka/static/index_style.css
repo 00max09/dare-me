@@ -1,0 +1,129 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: rgb(48, 46, 46);
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.content {
+    background-color: black;
+    width: 30%;
+    height: 100%;
+    box-shadow: 12px 0 15px -4px rgb(21,20,20), -12px 0 8px -4px rgb(21,20,20);
+}
+
+.left-slider {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.right-slider {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.button {
+    width: 10vw;
+    height: 10vw;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    height: 60%;
+    width: 60%;
+    background-color: #bbb;
+    border-radius: 50%;
+    /* display: inline-block; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow {
+    /* height: 50%;
+    width: 50%; */
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+/* .arrow-button {
+    display: flex;
+    color: #C2FFE9;
+    background-color: #00E692;
+    padding: 10px 16px;
+    border-radius: 20px;
+    transition: all .3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+    font-size: 14px;
+}
+
+.arrow-button > .arrow {
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #C2FFE9;
+    border-bottom: 2px solid #C2FFE9;
+    position: relative;
+    transform: rotate(-45deg);
+    margin: 0 6px;
+    transition: all .3s ease;
+}
+
+.arrow-button > .arrow::before {
+    display: block;
+    background-color: currentColor;
+    width: 3px;
+    transform-origin: bottom right;
+    height: 2px;
+    position: absolute;
+    opacity: 0;
+    bottom: calc(-2px / 2);
+    transform: rotate(45deg);
+    transition: all .3s ease;
+    content: "";
+    right: 0;
+}
+
+.arrow-button:hover > .arrow {
+    transform: rotate(-45deg) translate(4px, 4px);
+    border-color: text-hover-color;
+}
+
+.arrow-button:hover > .arrow::before {
+    opacity: 1;
+    width: 8px;
+}
+
+.arrow-button:hover {
+    background-color: #017A4F;
+    color: #fff;
+} */
