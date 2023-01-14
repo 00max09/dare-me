@@ -1,8 +1,8 @@
 <form enctype="multipart/form-data"
 action="/upload_file"
 method="POST">
-<input type="hidden" id="cat" value="{{data.category}}>
+<input type="hidden" name="cat" id="cat" value="{{data.id}}">
 File: <input type="FILE" name="file"/>
-{{data.category}}
+{{data.id}}
 <input type="submit" name="Upload" value="Upload" />
 </form>

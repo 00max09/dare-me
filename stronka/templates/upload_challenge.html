@@ -1,0 +1,11 @@
+{% for category in data.categories %}
+    Insert Challenge for category : {{category[1]}}    
+    <form enctype="multipart/form-data" action="/upload_challenge" method="POST">
+        <input type="hidden" name="category" id="category_id" value="{{category[0]}}">
+        Challenge instruction video  : <input type="FILE" name="file" required/>
+        Challenge description <input type="text" name="desc" id="description" required> </input>
+
+        
+        <input type="submit" name="Upload" value="Upload" />
+    </form>
+{% endfor %}

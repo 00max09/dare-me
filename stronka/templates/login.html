@@ -13,24 +13,8 @@
     			<br>
     			<input type="submit" class="button" value="Log In"/>
   			</form>
+        
+        <button onclick="window.location='/register'">Go to registration</button>
 		</div>
-
-    <div class="footer">
-      <h4><a href="http://www.github.com/PolBaladas"></a></h4>
-      <h5 style="text-align:center;"><a href="https://github.com/PolBaladas/GCI-LoginApp"></a></h5>
-    </div>
-    
-    {%if users%}
-    <div class="users" style="margin-left:20%">
-      <h2>Registered Users List</h2>
-      <table style="width:100%;">
-        {%for user in users%}
-          <tr>
-            <td>{{user[0]}}</td>
-          </tr>   
-        {%endfor%}
-      </table>
-    </div>
-    {%endif%}
 </body>
 </html>

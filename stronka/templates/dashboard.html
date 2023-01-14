@@ -2,32 +2,49 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_style.css') }}">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <script src="{{ url_for('static', filename='dashboard_funs.js') }}"></script>
     </head>
     <body>
+        <div class="headliner">
+            <div class="headliner-content">
+                <div class="logout-button-cover" style="padding-right: 4vw;">
+                    <button class="arrow-button" onclick="window.location='/logout'">LOGOUT</button>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="content">
-                {% for category in data.categories %}
-                {{category}}
-                    <div class="category">
-                        <div class="category-watch">
-                            <button class="arrow-button" onclick="window.location='/watch?cat={{category}}';">WATCH CATEGORY</button>
-                            
+                <div class="tasks">
+                    {% for (id,category_name) in data.categories %}
+                    {{category_name}}
+                        <div class="category">
+                            <div class="category-upload">
+                                <button class="arrow-button" onclick="window.location='/category/{{id}}';">UPLOAD CHALLENGE</button>
+                            </div>
                         </div>
-                        <div class="category-challenge-desc">
-                            <button class="arrow-button" onclick="window.location='/challengedesc?cat={{category}}';">CHALLENGE DESCRIPTION</button>
-                        
-                        </div>
-                        <div class="category-upload">
-                            <button class="arrow-button" onclick="window.location='/upload?cat={{category}}';">UPLOAD CHALLENGE</button>
-                        </div>
-                    </div>
-                    <br>
-                {% endfor %}
-                {{data.username}}
+                        <br>
+                    {% endfor %}
+                </div>
             </div>
             <div class="content">
-                <button class="arrow-button" onclick="window.location='/watch';">RANDOM WATCH</button>
+                <div class="watch-things" style="display: inline-block;"">
+                    <div class="watch-random">
+                        <button class="arrow-button" onclick="window.location='/watch';">RANDOM WATCH</button>
+                    </div>
+                    <div class="watch-categories">
+                        <div class="watch-centered">
+                            {% for (id,category_name) in data.categories %}
+                            <div class="category-watch">
+                                <button class="arrow-button" onclick="window.location='/watch/{{id}}';">WATCH {{category_name}}</button>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
