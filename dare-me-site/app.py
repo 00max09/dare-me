@@ -1,14 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, session, jsonify
 from flask import request, send_from_directory
-from models import  personLikePush, getLikes, insertChallenge, insertInstructionMovie, insertUser, insertMovie, getMaxMovieId, retrieveAllMovies, retrieveMoviesByCategory, retrieveAllCategories, retrieveChallengesByCategory, retrieveInstructionMovieName, retrieveUserID
+from models import retrieveCategoryNameById, challangeDescById, personLikePush, getLikes, insertChallenge, insertInstructionMovie, insertUser, insertMovie, getMaxMovieId, retrieveAllMovies, retrieveMoviesByCategory, retrieveAllCategories, retrieveChallengesByCategory, retrieveInstructionMovieName, retrieveUserID, retrieveMoviesByUser, retrieveAllUsersWithLikes
 from functools import wraps
-import sys
 import sqlite3
 from werkzeug.utils import secure_filename
 import os
 
 UPLOAD_FOLDER = 'uploaded'
-ALLOWED_EXTENSIONS = {'jpg', 'mp4'}
+ALLOWED_EXTENSIONS = {'mp4'}
 
 
 app = Flask(__name__)
@@ -59,18 +58,19 @@ def home():
 @login_required
 def show_watch():
     movies = retrieveAllMovies()
-    print("zwykly watch", file=sys.stderr)
-    print(movies, file=sys.stderr)
-    # filenames = [i[0] for i in movies]
-    return render_template('watch.html', data={'movies': movies})
+    return render_template('watch.html', data={'movies': addChallDesc(movies)})
 
 @app.route('/watch/<category_id>')
 @login_required
 def show_watch_category(category_id):
-    print("watch id: ", category_id,  file=sys.stderr)
-    filenames = [i[0] for i in retrieveMoviesByCategory(category_id)]
-    print("filenames: ", filenames,  file=sys.stderr)
-    return render_template('watch.html', data={'filenames': filenames})
+    movies = retrieveMoviesByCategory(category_id)
+    return render_template('watch.html', data={'movies': addChallDesc(movies)})
+
+@app.route('/watch_user/<username>')
+@login_required
+def show_watch_user(username):
+    movies = retrieveMoviesByUser(username)
+    return render_template('watch.html', data={'movies': addChallDesc(movies)})
 
 @app.route('/like/<film_id>', methods=['POST'])
 @login_required 
@@ -91,13 +91,19 @@ def show_dashboard():
     categories = retrieveAllCategories()
     return render_template('dashboard.html', data={'username': session['username'], 'categories': categories})
 
+@app.route('/hall_of_fame')
+@login_required
+def show_hall_of_fame():
+    users_with_likes = retrieveAllUsersWithLikes()
+    return render_template('hall_of_fame.html', data={'users_with_likes': users_with_likes})
 
 
 @app.route('/category/<category_id>')
 @login_required
 def show_category(category_id):
     challenges_list = retrieveChallengesByCategory(category_id)
-    return render_template('category.html', data={'username': session['username'], 'challenges': challenges_list})
+    category_name = retrieveCategoryNameById(category_id)
+    return render_template('category.html', data={'username': session['username'], 'challenges': challenges_list, 'category_name': category_name})
 
 @app.route('/challengedesc/<file_id>')
 @login_required
@@ -119,7 +125,6 @@ def login():
             return render_template("login.html")
     else:
         return render_template('login.html')
-# sqlite3 database.db < schema.sql
 
 @app.route('/register',methods=["POST", "GET"])
 def register():
@@ -135,14 +140,12 @@ def register():
 @app.route('/upload/<challenge_id>',methods=["GET"])
 @login_required
 def upload(challenge_id):
-    # TODO: jak nie ma kategorii to problem to piszemy że jest hakerem i niech przekieruje do haker simularoe
-    return render_template('upload.html', data = {'id':challenge_id})
+    return render_template(f'upload.html', data = {'id':challenge_id})
 
 @app.route('/files/<path:name>',methods=["GET"])
 def get_video(name):
     if name[-4:] != '.mp4':
         name += '.mp4'
-    print(name[-4:], file=sys.stderr)
     return send_from_directory(app.config['UPLOAD_FOLDER'], name)
 
 @app.route('/upload_file',methods=["POST"])
@@ -150,16 +153,17 @@ def get_video(name):
 def upload_file():
     file = request.files['file']
     challenge_id = request.form['cat']
-    print("Id challonge:", challenge_id, sys.stderr)
-    #cat_id = retrieveCategoryId(cat_name)
     if file.filename == '':
-        return redirect('/upload')
+        return redirect(f'/upload/{challenge_id}')
+
     if file and allowed_file(file.filename):
         insertMovie(session['username'], challenge_id)
         file.filename = str(getMaxMovieId()) + ".mp4"
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return redirect('/dashboard')
+    else:
+        return redirect(f'/upload/{challenge_id}')
 
 @app.route('/upload_challenge',methods=["GET", "POST"])
 @admin_required
@@ -186,8 +190,12 @@ def logout():
     return redirect('/login')
 
 
+
+def addChallDesc(movies):
+    return [(id, uploader, challangeDescById(challenge_id), likes) for (id, uploader, challenge_id, likes) in movies]
+
+
 if __name__ == '__main__':
-    print("all usrs", file=sys.stderr)
     init_db()
     app.run(debug=False, host='0.0.0.0')
 

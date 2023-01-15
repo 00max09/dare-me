@@ -1,0 +1,119 @@
+@import "color.css";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-primary);
+    font-family: Arial;
+    display: inline-block;
+}
+
+.container {
+    background-color: var(--background-primary);
+    width: 100%;
+    height: 90%;
+    display: flex;
+}
+
+input[type=text], select, input[type=password] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    align-self: center;
+}
+  
+.log-con .button-cover{
+    height: 3%;
+    width: 5%;
+    padding-left: 4vw; 
+}
+
+
+.log-con {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.log-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.log-input-cover{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-button-cover{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-button {
+    display: flex;
+    color: var(--font);
+    background-color: var(--button);
+    width: 100%;
+    height: 100%;
+    padding: 1% 2%;
+    /* border-radius: 2em 0% 0% 0%; */
+    transition: all .3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90%;
+    border-style: none;
+}
+
+.arrow-button:hover {
+    background-color: var(--button-hover);
+    color: var(--font-hover);
+}
+
+.header-cover {
+    color: var(--font-hover);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.login-button-subcover {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transf-log-reg-button-cover{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.transf-log-reg-button-subcover{
+    width: 80%;
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

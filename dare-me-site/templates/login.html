@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_style.css') }}"> -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='login_style.css') }}">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="log-con">
+			<div class="header-cover">
+				<h1>LOGIN</h1>
+			</div>
+			<form action="/login" class="log-form" method="post">
+				<div class="log-input-cover">
+					<input type="text" name="username" id="username" placeholder="Username" required />
+				</div>
+
+				<div class="log-input-cover">
+					<input type="password" name="password" id="password" placeholder="Password" required />
+				</div>
+
+				<div class="login-button-cover">
+					<div class="login-button-subcover">
+						<button type="submit" class="arrow-button"> LOGIN </button>
+					</div>
+				</div>
+			</form>
+			<div class="transf-log-reg-button-cover" >
+				<div class="transf-log-reg-button-subcover" >
+					<button class="arrow-button" onclick="window.location='/register'">GO TO REGISTRATION</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

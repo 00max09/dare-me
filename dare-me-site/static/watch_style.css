@@ -1,0 +1,227 @@
+@import "color.css";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-primary);
+    display: inline-block;
+    font-family: Arial;
+}
+
+.headliner {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headliner-content {
+    background-color: var(--background-secondary);
+    width: 96%;
+    height: 50%;
+    box-shadow: 0.05vh 0.05vh 0.15vh 0.15vh var(--background-secondary), /* Border bottom */
+    0.05vh -0.05vh 0.15vh 0.15vh var(--background-secondary), /* Border top */
+    -0.05vh 0.05vh 0.15vh 0.15vh var(--background-secondary), /* Border left */
+    -0.05vh -0.05vh 0.15vh 0.15vh var(--background-secondary); /* Border right */
+    display: flex;
+    align-items: center;
+}
+
+.headliner-left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.headliner-right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.headliner-right .button-cover {
+    height: 80%;
+    width: 20%;
+    padding-right: 4vw;
+}
+
+.button-cover .arrow-button {
+    height: 100%;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.headliner-left .button-cover {
+    height: 80%;
+    width: 20%;
+    padding-left: 4vw;
+}
+
+.container {
+    background-color: var(--background-primary);
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-player {
+    background-color: var(--background-secondary);
+    width: 95%;
+    height: 90%;
+    box-shadow: 0.1vw 0.1vw 0.3vw 0.3vw var(--background-secondary), /* Border bottom */
+    0.1vw -0.1vw 0.3vw 0.3vw var(--background-secondary), /* Border top */
+    -0.1vw 0.1vw 0.3vw 0.3vw var(--background-secondary), /* Border left */
+    -0.1vw -0.1vw 0.3vw 0.3vw var(--background-secondary); /* Border right */
+    display: flex;
+}
+
+.content {
+    background-color: var(--video-background);
+    width: 30%;
+    height: 100%;
+    box-shadow: 0.05vh 0.05vh 0.15vh 0.15vh var(--video-background), /* Border bottom */
+    0.05vh -0.05vh 0.15vh 0.15vh var(--video-background), /* Border top */
+    -0.05vh 0.05vh 0.15vh 0.15vh var(--video-background), /* Border left */
+    -0.05vh -0.05vh 0.15vh 0.15vh var(--video-background); /* Border right */
+    display: inline-block;
+}
+.content-video {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-video #player {
+    width: 96%;
+    height: 100%;
+}
+
+.content-info {
+    width: 100%;
+    height: 10%;
+    font-family: Arial;
+}
+
+.content-info-wrap {
+    width: 100%;
+    height: 90%;
+    font-family: Arial;
+}
+
+.likes-container {
+    height: 40%;
+    padding-bottom: 1%;
+}
+.uploader-container {
+    height: 30%;
+    padding-bottom: 1%;
+}
+.challenge-container {
+    height: 30%;
+}
+
+.left-slider {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.right-slider {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.button {
+    width: 33%;
+    height: 20%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    height: 60%;
+    width: 60%;
+    background-color: var(--button);
+    border-radius: 50%;
+    /* display: inline-block; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-style: none;
+}
+
+.dot:hover {
+    background-color: var(--button-hover);
+    color: var(--font-hover);
+}
+
+.button i {
+    height: 100%;
+    width: 100%;
+    font-size: 500%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-button {
+    display: flex;
+    color: var(--font);
+    background-color: var(--button);
+    width: 10%;
+    height: 10%;
+    padding: 5% 8%;
+    /* border-radius: 2em 0% 0% 0%; */
+    transition: all .3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90%;
+    border-style: none;
+}
+
+.arrow-button:hover {
+    background-color: var(--button-hover);
+    color: var(--font-hover);
+}
+
+#like-button {
+    display: flex;
+    color: var(--font-hover);
+    background-color: var(--button);
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+#like-button:hover {
+    background-color: var(--button-hover) !important;
+    color: var(--font-hover);
+}
+
+.likes-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}

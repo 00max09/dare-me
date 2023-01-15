@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_style.css') }}">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="{{ url_for('static', filename='dashboard_funs.js') }}"></script>
+    </head>
+    <body>
+        <div class="headliner">
+            <div class="headliner-content">
+                <div class="headliner-left">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/hall_of_fame'">HALL OF FAME</button>
+                    </div>
+                </div>
+                <div class="headliner-right">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/logout'">
+                            <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 200%;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="tasks">
+                    <div class="tasks-categories">
+                        {% for (id,category_name) in data.categories %}
+                            <div class="category">
+                                <div class="category-upload">
+                                    <button class="arrow-button" onclick="window.location='/category/{{id}}';">BROWSE {{category_name}} CHALLENGES</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="watch-things" style="display: inline-block;"">
+                    <div class="watch-random">
+                        <div class="watch-centered">
+                            <button class="arrow-button" onclick="window.location='/watch';">RANDOM WATCH</button>
+                        </div>
+                    </div>
+                    <div class="watch-categories">
+                        <div class="watch-centered">
+                            {% for (id,category_name) in data.categories %}
+                            <div class="category-watch">
+                                <button class="arrow-button" onclick="window.location='/watch/{{id}}';">WATCH {{category_name}}</button>     
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

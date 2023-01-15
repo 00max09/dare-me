@@ -1,0 +1,221 @@
+@import "color.css";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-primary);
+    display: inline-block;
+    font-family: Arial;
+}
+
+.headliner {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headliner-content {
+    background-color: var(--background-secondary);
+    width: 96%;
+    height: 50%;
+    box-shadow: 0.05vh 0.05vh 0.15vh 0.15vh var(--background-secondary), /* Border bottom */
+    0.05vh -0.05vh 0.15vh 0.15vh var(--background-secondary), /* Border top */
+    -0.05vh 0.05vh 0.15vh 0.15vh var(--background-secondary), /* Border left */
+    -0.05vh -0.05vh 0.15vh 0.15vh var(--background-secondary); /* Border right */
+    display: flex;
+    align-items: center;
+}
+
+.headliner-left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.headliner-right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.headliner-right .button-cover {
+    height: 80%;
+    width: 20%;
+    padding-right: 4vw;
+}
+
+.button-cover .arrow-button {
+    height: 100%;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.headliner-left .button-cover {
+    height: 80%;
+    width: 20%;
+    padding-left: 4vw;
+}
+
+
+.container {
+    background-color: var(--background-primary);
+    width: 100%;
+    height: 90%;
+    display: flex;
+}
+
+.content {
+    background-color: var(--background-primary);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.challenges {
+    background-color: var(--background-secondary);
+    width: 95%;
+    height: 90%;
+    box-shadow: 0.1vw 0.1vw 0.3vw 0.3vw var(--background-secondary), /* Border bottom */
+    0.1vw -0.1vw 0.3vw 0.3vw var(--background-secondary), /* Border top */
+    -0.1vw 0.1vw 0.3vw 0.3vw var(--background-secondary), /* Border left */
+    -0.1vw -0.1vw 0.3vw 0.3vw var(--background-secondary); /* Border right */
+    /* display: inline-block; */
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.category-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    height: 10%;
+    width: 100%;
+}
+
+.category-cover {
+    display: flex;
+    color: var(--font);
+    background-color: var(--button);
+    width: 90%;
+    height: 50%;
+    transition: all .3s ease;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90%;
+}
+
+.challenges-list {
+    width: 100%;
+    height: 90%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.challenge {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.challenge-name {
+    width: 50%;
+    height: 100%;
+    padding-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.challenge-name-cover {
+    display: flex;
+    color: var(--font);
+    background-color: var(--button);
+    width: 100%;
+    height: 80%;
+    /* padding: 1% 40%; */
+    transition: all .3s ease;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90%;
+    text-transform: uppercase;
+}
+
+.challenge-desc {
+    width: 15%;
+    height: 100%;
+    padding-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.challenge-upload {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.challenge-desc .arrow-button {
+    width: 100%;
+    height: 80%;
+}
+
+.challenge-upload .arrow-button {
+    width: 100%;
+    height: 80%;
+}
+
+.arrow-button {
+    display: flex;
+    color: var(--font);
+    background-color: var(--button);
+    width: 10%;
+    height: 10%;
+    padding: 5% 8%;
+    /* border-radius: 2em 0% 0% 0%; */
+    transition: all .3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90%;
+    border-style: none;
+}
+
+.watch-centered .arrow-button {
+    width:100%;
+    height: 50%;
+    text-transform: uppercase;
+}
+
+.category-upload .arrow-button {
+    width:100%;
+    height: 50%;
+    text-transform: uppercase;
+}
+
+.arrow-button:hover {
+    background-color: var(--button-hover);
+    color: var(--font-hover);
+}

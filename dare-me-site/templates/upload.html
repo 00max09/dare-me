@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="{{ url_for('static', filename='upload_funs.js') }}"></script>
+    </head>
+    <body>
+        <div class="headliner">
+            <div class="headliner-content">
+                <div class="headliner-left">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/dashboard'">GO BACK TO DASHBOARD</button>
+                    </div>
+                </div>
+                <div class="headliner-right">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/logout'">
+                            <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 200%;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="uploader">
+                    <form enctype="multipart/form-data" action="/upload_file" method="POST">
+                        <input type="hidden" name="cat" id="cat" value="{{data.id}}">
+                        <input type="FILE" name="file" />
+                        <p>Click to upload file.</p>
+                        <button type="submit">Upload selected files</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

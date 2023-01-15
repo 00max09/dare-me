@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='watch_style.css') }}">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            let sources = [
+                {% for (id, uploader, challenge_desc, likes) in data.movies %}
+                        ["{{url_for('get_video', name=id)}}", "{{uploader}}", {{likes}}, {{id}}, "{{challenge_desc}}"],
+                {% endfor %}
+            ];
+             let counter = 0;
+
+             function refersh_movie_details() {
+                document.getElementById("player-source").setAttribute('src', sources[counter][0]);
+                document.getElementById("player").load();
+                document.getElementById("likes-number").innerHTML = sources[counter][2];
+                document.getElementById("uploader").innerHTML = "Made by: " + sources[counter][1];
+                document.getElementById("challange").innerHTML = "Challenge: " + sources[counter][4];
+                get_likes();
+             }
+             function get_movie() {
+                if (sources.length > 0) {
+                    counter += 1;
+                    counter %= sources.length;
+                    refersh_movie_details();
+                }
+            }
+            function get_movie_dec() {
+                if (sources.length > 0) {
+                    counter -= 1;
+                    counter += sources.length;
+                    counter %= sources.length;
+                    refersh_movie_details()
+                }
+            }
+            let liked = []
+            function like() {
+                $.ajax({
+                    type: 'POST',
+                    url: "/like/" + String(sources[counter][3]),
+                    data: {},
+                    dataType: 'text',
+                    success: function (response) {
+                        get_likes();
+                    }
+                })
+            }
+
+            function get_likes() {
+                $.ajax({
+                    type: 'GET',
+                    url: "/get_likes/" + String(sources[counter][3]),
+                    success: function (data) {
+                        console.log(data);
+                        document.getElementById("likes-number").innerHTML = data.likes;
+                        if (data.is_liked) {
+                            document.getElementById("like-button").style["background-color"] = "#939494";
+                            // document.createElement('style').appendChild(
+                            //     document.createTextNode("#like-button:hover{ background-color: #302d2d }")
+                            // );
+                            // document.getElementById("like-button").onmouseover.style["background-color"] = "#302d2d";
+                        }
+                        else {
+                            document.getElementById("like-button").style["background-color"] = "white";
+                            // document.createElement('style').appendChild(
+                            //     document.createTextNode("#like-button:hover{ background-color: #302d2d }")
+                            // );
+                            // document.getElementById("like-button").onmouseover.style["background-color"] = "#302d2d";
+                        }
+                    }
+                })
+            }
+             
+        </script>
+    </head>
+    <body onload="get_movie()">
+        <div class="headliner">
+            <div class="headliner-content">
+                <div class="headliner-left">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/hall_of_fame'">HALL OF FAME</button>
+                    </div>
+                </div>
+                <div class="headliner-right">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/dashboard'">GO BACK TO DASHBOARD</button>
+                    </div>
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/logout'">
+                            <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 200%;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="video-player">
+                <div class="left-slider">
+                    <div class="button">
+                        <button class="dot" style="padding-left: 10%;" onclick="get_movie_dec()">
+                            <i class="fa fa-angle-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    {% if data.movies|length > 0 %}
+                    <div class="content-video">
+                        <video id="player" height="90%" width="100%" controls autoplay muted loop>
+                            <source id="player-source" type="video/mp4" >
+                        </video>
+                    </div>
+                    <div class="content-info">
+                        <div class="content-info-wrap">
+                            <div class="likes-container">
+                                <button onclick="like()" id="like-button">👍</button>
+                                &nbsp;
+                                <b id="likes-number" style="color: white;">10</b>
+                            </div>
+                            <div class="uploader-container">
+                                <b id="uploader" style="color: white;">uploader</b>
+                            </div>
+                            <div class="challange-container">
+                                <b id="challange" style="color: white;">challenge</b>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <b id="no-videos" style="color: white"> There is no films from your category, go back to dashboard and be the first to upload </b>
+                    {% endif %}
+
+                </div>
+                <div class="right-slider">
+                    <div class="button">
+                        <button class="dot" style="padding-right: 10%;" onclick="get_movie()">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

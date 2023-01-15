@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='hall_of_fame.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="{{ url_for('static', filename='dashboard_funs.js') }}"></script>
+    </head>
+    <body>
+        <div class="headliner">
+            <div class="headliner-content">
+                <div class="headliner-left">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/dashboard'">GO BACK TO DASHBOARD</button>
+                    </div>
+                </div>
+                <div class="headliner-right">
+                    <div class="button-cover">
+                        <button class="arrow-button" onclick="window.location='/logout'">
+                            <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 200%;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="tasks">
+                    {% for (user, likes) in data.users_with_likes %}
+                        <div class="task">
+                            <div class="user-task">
+                                <div class="centered-user-task">
+                                    {{user}}
+                                </div>
+                            </div>
+                            <div class="likes-task">
+                                <div class="centered-likes-task">
+                                    {{likes}}👍
+                                </div>
+                            </div>
+                            <div class="movies-task">
+                                <div class="centered-movies-task">
+                                    <button class="movie-button" onclick="window.location='/watch_user/{{user}}';">
+                                        <i class="fa fa-film" aria-hidden="true"></i>
+                                        &nbsp;
+                                        <div class="text-box" style="font-family: Arial;">movies</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

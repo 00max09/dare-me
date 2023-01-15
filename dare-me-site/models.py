@@ -51,7 +51,6 @@ def retrieveAllCategories():
     return data
 
 def retrieveMoviesByCategory(category_id):
-    print(category_id, file=sys.stderr)
     con = sql.connect("database.db")
     cur = con.cursor()
     cur.execute(f"""
@@ -60,6 +59,15 @@ def retrieveMoviesByCategory(category_id):
     ON a.challenge_id = b.id
     WHERE b.category_id = {category_id}
     """)
+    data = cur.fetchall()
+    con.commit()
+    con.close()
+    return data
+
+def retrieveMoviesByUser(user_name):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute(f"SELECT id, uploader, challenge_id, likes FROM movies WHERE uploader = \"{user_name}\"")
     data = cur.fetchall()
     con.commit()
     con.close()
@@ -104,14 +112,11 @@ def insertChallenge(category_id, descript, file_id):
 def personLikePush(film_id, user):
     con = sql.connect("database.db")
     cur = con.cursor()
-    print(f"SELECT * FROM likes WHERE file_id = {film_id} AND user_id = {user}", file=sys.stderr)
     cur.execute(f"SELECT * FROM likes WHERE file_id = {film_id} AND user_id = {user}")
     res = cur.fetchall()
     if len(res) :
-        print("unliked", file=sys.stderr)
         cur.execute(f"DELETE FROM likes WHERE file_id = {film_id} AND user_id = {user}")
     else:
-        print("liked", file=sys.stderr)
         cur.execute("INSERT INTO likes(user_id, file_id) VALUES (?,?)", (user, film_id))
     con.commit()
     con.close()
@@ -128,3 +133,42 @@ def getLikes(movie_id, user_id):
     con.commit()
     con.close()
     return (is_liked, likes)
+
+def retrieveAllUsersWithLikes():
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute(f"""
+    WITH movies_likes as (
+        SELECT a.uploader AS uploader, COUNT(*) as likes
+        FROM movies as a INNER JOIN likes as b 
+        ON a.id = b.file_id
+        GROUP BY a.uploader
+    )
+    SELECT * FROM movies_likes
+    WHERE likes > 0 
+    ORDER BY likes DESC
+    """)
+    data = cur.fetchall()
+    con.commit()
+    con.close()
+    return data
+
+
+def challangeDescById(challange_id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute(f"SELECT descript FROM challenge WHERE id = {challange_id}")
+    desc = cur.fetchone()[0]
+    con.commit()
+    con.close()
+    return desc
+
+def retrieveCategoryNameById(category_id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute(f"SELECT category_type FROM category WHERE id = {category_id}")
+    desc = cur.fetchone()[0]
+    con.commit()
+    con.close()
+    return desc
+

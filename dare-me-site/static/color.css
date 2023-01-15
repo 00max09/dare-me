@@ -1,0 +1,9 @@
+:root{
+    --background-primary: rgb(25, 25, 25);
+    --background-secondary: #121212;
+    --button: #4276ab ;
+    --button-hover: #1a324a ;
+    --font: #000000;
+    --font-hover: #d2d2d2;
+    --video-background: black
+}
